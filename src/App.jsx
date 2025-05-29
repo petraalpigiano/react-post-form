@@ -2,14 +2,22 @@ import axios from "axios";
 import { useState } from "react";
 
 export default function App() {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     author: "",
     title: "",
     body: "",
     public: false,
-  });
-  function handleFormData(event) {
+  };
+  const [formData, setFormData] = useState(initialFormData);
+
+  function handleFormSubmit(event) {
     event.preventDefault();
+    axios
+      .post("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData)
+      .then((res) => console.log(res));
+  }
+
+  function handleFormData(event) {
     const value =
       event.target.type === "checkbox"
         ? event.target.checked
@@ -19,9 +27,10 @@ export default function App() {
       [event.target.name]: value,
     }));
   }
+
   return (
     <>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <div className="container">
           <div className="mb-3">
             <label htmlFor="author-input" className="form-label">
