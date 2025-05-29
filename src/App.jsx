@@ -10,9 +10,13 @@ export default function App() {
   });
   function handleFormData(event) {
     event.preventDefault();
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
     setFormData((formData) => ({
       ...formData,
-      [event.target.name]: event.target.value,
+      [event.target.name]: value,
     }));
   }
   return (
