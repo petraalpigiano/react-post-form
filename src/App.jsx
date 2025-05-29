@@ -1,35 +1,73 @@
 import axios from "axios";
+import { useState } from "react";
+
 export default function App() {
+  const [formData, setFormData] = useState({
+    author: "",
+    title: "",
+    body: "",
+    public: false,
+  });
+  function handleFormData(event) {
+    event.preventDefault();
+    setFormData((formData) => ({
+      ...formData,
+      [event.target.name]: event.target.value,
+    }));
+  }
   return (
     <>
       <form>
         <div className="container">
           <div className="mb-3">
-            <label htmlFor="author" className="form-label">
+            <label htmlFor="author-input" className="form-label">
               Author
             </label>
             <input
+              name="author"
+              value={formData.author}
+              onChange={handleFormData}
               type="text"
               className="form-control"
-              id="author"
+              id="author-input"
               aria-describedby="emailHelp"
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="title" className="form-label">
+            <label htmlFor="title-input" className="form-label">
               Title
             </label>
-            <input type="text" className="form-control" id="title" />
+            <input
+              name="title"
+              value={formData.title}
+              onChange={handleFormData}
+              type="text"
+              className="form-control"
+              id="title-input"
+            />
           </div>
           <div className="mb-3">
-            <label htmlFor="body" className="form-label">
+            <label htmlFor="body-input" className="form-label">
               Body
             </label>
-            <textarea className="form-control" id="body" />
+            <textarea
+              name="body"
+              value={formData.body}
+              onChange={handleFormData}
+              className="form-control"
+              id="body-input"
+            />
           </div>
           <div className="mb-3 form-check">
-            <input type="checkbox" className="form-check-input" id="public" />
-            <label className="form-check-label" htmlFor="public">
+            <input
+              name="public"
+              value={formData.public}
+              onChange={handleFormData}
+              type="checkbox"
+              className="form-check-input"
+              id="public-input"
+            />
+            <label className="form-check-label" htmlFor="public-input">
               Public
             </label>
           </div>
