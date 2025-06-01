@@ -1,4 +1,5 @@
 import axios from "axios";
+import Alert from "./components/Alert";
 import { useState } from "react";
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
     public: false,
   };
   const [formData, setFormData] = useState(initialFormData);
+  const [display, setDisplay] = useState("d-none");
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -17,6 +19,7 @@ export default function App() {
       .then((res) => console.log(res.data));
     // ex RESETTA IL FORM MA LA PAG DOVREBBE ESSERE RICARICATA PER TOGLIERE IL CHECKBOX
     setFormData(initialFormData);
+    setDisplay(" ");
   }
 
   function handleFormData(event) {
@@ -89,6 +92,7 @@ export default function App() {
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
+          <Alert show={display} />
         </div>
       </form>
     </>
