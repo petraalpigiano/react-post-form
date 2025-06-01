@@ -14,7 +14,9 @@ export default function App() {
     event.preventDefault();
     axios
       .post("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData)
-      .then((res) => console.log(res));
+      .then((res) => console.log(res.data));
+    // ex RESETTA IL FORM MA LA PAG DOVREBBE ESSERE RICARICATA PER TOGLIERE IL CHECKBOX
+    setFormData(initialFormData);
   }
 
   function handleFormData(event) {
